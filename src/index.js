@@ -1,17 +1,70 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Form from "./components/form";
+
+const fields = [
+  {
+    label: { htmlfor: "username", text: "Username:" },
+    input: {
+      type: "text",
+      name: "username",
+      placeholder: "Username",
+      id: "username",
+    },
+  },
+  {
+    label: { htmlfor: "email", text: "E-mail:" },
+    input: {
+      type: "email",
+      name: "email",
+      placeholder: "e-mail",
+      id: "email",
+    },
+  },
+  {
+    label: { htmlfor: "password", text: "Password:" },
+    input: {
+      type: "password",
+      name: "password",
+      placeholder: "Password",
+      id: "password",
+    },
+  },
+  {
+    label: { htmlfor: "confirmPassword", text: "Confirm Password:" },
+    input: {
+      type: "password",
+      name: "confirmPassword",
+      placeholder: "Confirm Password",
+      id: "confirmPassword",
+    },
+  },
+];
+
+const validationRules = [
+  {
+    name: "username",
+    condition: "values.username.length === 0",
+    message: "Length of username is too short",
+  },
+  {
+    name: "email",
+    condition: "values.email.length === 0",
+    message: "Length of email is too short",
+  },
+  {
+    name: "password",
+    condition: "values.password.length < 6",
+    message: "Length of password is too short",
+  },
+  {
+    name: "password",
+    condition: "values.password !== values.confirmPassword",
+    message: "Passwords must match",
+  },
+];
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Form fields={fields} validationRules={validationRules} />,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
